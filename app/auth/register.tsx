@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator, Image } from 'react-native';
 import { router } from 'expo-router';
-import { Shield, ArrowLeft } from 'lucide-react-native';
+import { ArrowLeft } from 'lucide-react-native';
 import { useAuth } from '@/context/AuthContext';
 import { colors } from '@/constants/Colors';
 import ErrorMessage from '@/components/ui/ErrorMessage';
@@ -49,7 +49,11 @@ export default function RegisterScreen() {
       </TouchableOpacity>
       
       <View style={styles.header}>
-        <Shield size={64} color={colors.primary} />
+        <Image 
+          source={require('@/assets/images/legacyradio.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
         <Text style={styles.title}>Create Account</Text>
         <Text style={styles.subtitle}>Join Legacy Radio</Text>
       </View>
@@ -138,6 +142,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 64,
     marginBottom: 32,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 16,
   },
   title: {
     fontFamily: 'Inter-Bold',
