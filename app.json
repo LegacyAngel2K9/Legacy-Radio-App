@@ -9,14 +9,54 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.legacyradio.app",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "voip"
+        ],
+        "NSMicrophoneUsageDescription": "Legacy Radio needs access to your microphone for voice communication",
+        "UIRequiredDeviceCapabilities": [
+          "carplay"
+        ]
+      },
+      "entitlements": {
+        "com.apple.developer.carplay-audio": true,
+        "com.apple.developer.playable-content": true
+      }
+    },
+    "android": {
+      "package": "com.legacyradio.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "automotive": {
+        "enabled": true,
+        "uses": ["media", "notification"]
+      }
     },
     "web": {
       "bundler": "metro",
       "output": "single",
       "favicon": "./assets/images/icon.png"
     },
-    "plugins": ["expo-router", "expo-font", "expo-web-browser"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Legacy Radio needs access to your microphone for voice communication"
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }
