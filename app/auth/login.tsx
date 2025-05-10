@@ -39,7 +39,6 @@ export default function LoginScreen() {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Legacy Radio</Text>
         <Text style={styles.subtitle}>Secure Voice Communication</Text>
       </View>
 
@@ -101,12 +100,6 @@ const styles = StyleSheet.create({
     width: 258,
     height: 33,
     marginBottom: 16,
-  },
-  title: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 32,
-    color: colors.white,
-    marginTop: 16,
   },
   subtitle: {
     fontFamily: 'Inter-Regular',
