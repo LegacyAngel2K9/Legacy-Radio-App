@@ -4,7 +4,7 @@
   <img src="assets/images/legacyradio.png" alt="Legacy Radio" width="258" height="33">
 </p>
 
-A secure voice communication platform built with React Native and Expo, designed for real-time push-to-talk (PTT) communication across multiple channels and servers.
+A secure voice communication platform built with React Native and Expo, designed for real-time push-to-talk (PTT) communication across multiple channels and servers. Featuring support for Apple CarPlay and Android Auto.
 
 ## Features
 
@@ -33,6 +33,16 @@ A secure voice communication platform built with React Native and Expo, designed
   - Region-based server organization
   - Server subscription management
   - User count tracking per server
+
+- **Vehicle Integration**
+  - Apple CarPlay support
+    - Voice channel integration
+    - Push-to-talk controls
+    - Channel switching
+  - Android Auto support
+    - Voice communication
+    - Hardware button mapping
+    - Audio routing
 
 ## Technology Stack
 
@@ -77,10 +87,12 @@ legacy-radio/
 │   │   ├── users/         # User management
 │   │   └── settings/      # App settings
 │   ├── auth/              # Authentication screens
+│   ├── carplay/           # CarPlay integration
 │   └── _layout.tsx        # Root layout configuration
 ├── components/            # Reusable components
 │   ├── channels/         # Channel-related components
 │   ├── users/            # User-related components
+│   ├── carplay/          # CarPlay components
 │   └── ui/               # Common UI components
 ├── context/              # React Context providers
 ├── constants/            # App constants
@@ -104,6 +116,23 @@ legacy-radio/
 - Channel permissions
 - User presence tracking
 - Active speaker indicators
+
+### Vehicle Integration
+
+#### Apple CarPlay
+
+- Dedicated CarPlay interface
+- Voice channel integration
+- Push-to-talk controls
+- Channel switching
+- Audio routing optimization
+
+#### Android Auto
+
+- Custom button mapping
+- Voice communication
+- Audio device management
+- Background service support
 
 ### User Interface
 
@@ -131,6 +160,56 @@ Configure audio settings in the settings tab:
 - Noise suppression
 - Bluetooth device support
 
+### Vehicle Integration Settings
+
+#### CarPlay Configuration
+
+Enable CarPlay support in your `app.json`:
+
+```json
+{
+  "expo": {
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "voip"
+        ],
+        "NSMicrophoneUsageDescription": "Legacy Radio needs access to your microphone for voice communication",
+        "UIRequiredDeviceCapabilities": [
+          "carplay"
+        ]
+      },
+      "entitlements": {
+        "com.apple.developer.carplay-audio": true,
+        "com.apple.developer.playable-content": true
+      }
+    }
+  }
+}
+```
+
+#### Android Auto Configuration
+
+Enable Android Auto support in your `app.json`:
+
+```json
+{
+  "expo": {
+    "android": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "automotive": {
+        "enabled": true,
+        "uses": ["media", "notification"]
+      }
+    }
+  }
+}
+```
+
 ## Development
 
 ### Running the App
@@ -146,11 +225,25 @@ npm run build:web
 npm run lint
 ```
 
+### Testing Vehicle Integration
+
+1. CarPlay:
+   - Use the CarPlay Simulator in Xcode
+   - Test on a real device with CarPlay support
+
+2. Android Auto:
+   - Use the Desktop Head Unit (DHU)
+   - Test on a real vehicle or Android Auto compatible head unit
+
 ### Platform Support
 
 - Web (Primary platform)
 - iOS (Through Expo)
+  - iPhone/iPad
+  - CarPlay
 - Android (Through Expo)
+  - Phone/Tablet
+  - Android Auto
 
 ## Contributing
 
