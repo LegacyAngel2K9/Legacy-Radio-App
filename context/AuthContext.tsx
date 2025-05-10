@@ -4,7 +4,7 @@ import { AuthState, User } from '@/types';
 
 // Create the context with a default value
 const AuthContext = createContext<AuthState>({
-  isAuthenticated: false,
+  isAuth: false,
   isLoading: true,
   user: null,
   token: null,
@@ -21,7 +21,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           const currentUser = await getCurrentUser();
           if (currentUser) {
             setUser(currentUser);
-            setIsAuthenticated(true);
+            setIsAuth(true);
           }
         }
       } catch (error) {
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { token, user } = await loginUser(username, password);
       setToken(token);
       setUser(user);
-      setIsAuthenticated(true);
+      setIsAuth(true);
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { token, user } = await registerUser(username, email, password);
       setToken(token);
       setUser(user);
-      setIsAuthenticated(true);
+      setIsAuth(true);
     } catch (error) {
       console.error('Register error:', error);
       throw error;
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await logoutUser();
       setToken(null);
       setUser(null);
-      setIsAuthenticated(false);
+      setIsAuth(false);
     } catch (error) {
       console.error('Logout error:', error);
       throw error;
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const value = {
-    isAuthenticated,
+    isAuth,
     isLoading,
     user,
     token,
