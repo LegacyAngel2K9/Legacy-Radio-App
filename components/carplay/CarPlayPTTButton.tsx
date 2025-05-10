@@ -1,30 +1,34 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Mic } from 'lucide-react-native';
-import { colors } from '@/constants/Colors';
 import { useVoice } from '@/context/VoiceContext';
+import { colors } from '@/constants/Colors';
 
 export default function CarPlayPTTButton() {
   const { startSpeaking, stopSpeaking, isSpeaking } = useVoice();
 
-  if (Platform.OS !== 'ios') {
-    return null;
-  }
+  const handlePressIn = () => {
+    startSpeaking();
+  };
+
+  const handlePressOut = () => {
+    stopSpeaking();
+  };
 
   return (
     <TouchableOpacity
       style={[
         styles.button,
-        isSpeaking && styles.speaking
+        isSpeaking && styles.buttonActive
       ]}
-      onPressIn={startSpeaking}
-      onPressOut={stopSpeaking}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
       activeOpacity={0.7}
     >
-      <Mic 
-        size={48} 
-        color={colors.white}
-        style={styles.icon}
+      <Mic
+        size={32}
+        color={isSpeaking ? colors.background : colors.text.primary}
+        strokeWidth={2.5}
       />
     </TouchableOpacity>
   );
@@ -32,22 +36,16 @@ export default function CarPlayPTTButton() {
 
 const styles = StyleSheet.create({
   button: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: colors.primary,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    borderWidth: 2,
+    borderColor: colors.text.primary,
   },
-  speaking: {
-    backgroundColor: colors.error,
-  },
-  icon: {
-    opacity: 0.9,
+  buttonActive: {
+    backgroundColor: colors.text.primary,
   },
 });
