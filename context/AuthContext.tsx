@@ -51,6 +51,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (username: string, password: string) => {
     setIsLoading(true);
     try {
+      // Check for temporary admin login
+      if (username === 'admin' && password === 'admin') {
+        const tempUser: User = {
+          id: 'admin',
+          username: 'Administrator',
+          rank: 'Admin',
+          status: 'online',
+          serverId: null,
+        };
+        const tempToken = 'temp_admin_token';
+        
+        setToken(tempToken);
+        setUser(tempUser);
+        setIsAuth(true);
+        return;
+      }
+
       const { token, user } = await loginUser(username, password);
       setToken(token);
       setUser(user);
