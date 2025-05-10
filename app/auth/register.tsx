@@ -50,11 +50,15 @@ export default function RegisterScreen() {
       
       <View style={styles.header}>
         <Image 
+          source={require('@/assets/images/icon.png')}
+          style={styles.icon}
+          resizeMode="contain"
+        />
+        <Image 
           source={require('@/assets/images/legacyradio.png')}
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Create Account</Text>
         <Text style={styles.subtitle}>Join Legacy Radio</Text>
       </View>
 
@@ -143,16 +147,15 @@ const styles = StyleSheet.create({
     marginTop: 64,
     marginBottom: 32,
   },
+  icon: {
+    width: 48,
+    height: 48,
+    marginBottom: 24,
+  },
   logo: {
     width: 258,
     height: 33,
     marginBottom: 16,
-  },
-  title: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 28,
-    color: colors.white,
-    marginTop: 16,
   },
   subtitle: {
     fontFamily: 'Inter-Regular',

@@ -35,6 +35,11 @@ export default function LoginScreen() {
     >
       <View style={styles.header}>
         <Image 
+          source={require('@/assets/images/icon.png')}
+          style={styles.icon}
+          resizeMode="contain"
+        />
+        <Image 
           source={require('@/assets/images/legacyradio.png')}
           style={styles.logo}
           resizeMode="contain"
@@ -95,6 +100,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 64,
     marginBottom: 48,
+  },
+  icon: {
+    width: 48,
+    height: 48,
+    marginBottom: 24,
   },
   logo: {
     width: 258,
